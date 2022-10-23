@@ -2,6 +2,11 @@
 // functionality using the Arduino API. In contrast the zyBook,
 // the Arduino API does not provide the programmer with direct
 // access to Timer Interrupt functions. 
+/* Name: Joseph Chang
+   Email: jchan443@ucr.edu
+   I acknowledge all content contained herein, excluding template or example code, is my own original work.
+   Demo Vid: https://youtu.be/UYW5qVJ7nw0
+*/
 const unsigned long period = 1000; 
 unsigned long lastRan;
 
@@ -35,10 +40,7 @@ void Tick(){
         state = S0;  
         break;
       case S0:
-        t = t++;
-        if(t > 4){
-            t = 1;
-        }
+        t = t+1;
         state = S0;
         break;
       default: // should never get here
@@ -51,9 +53,13 @@ void Tick(){
         break;
       case S0:
         for(int i = 0; i < 4; i++){
-            digitalWrite(B[i], LOW);
+            digitalWrite(b[i], LOW);
         }
-        digitalWrite(B[t-1], HIGH);
+        if(t > 4){
+            t = 1;
+        }
+        Serial.println(t);
+        digitalWrite(b[t-1], HIGH);
         break;
      default: // should never get here
         break;
